@@ -17,30 +17,27 @@ class Tetromino{
         this.id = id;
     }
 
-    //Provisonial
-    drawSquare(x,y,size,color){
+    drawSquare(x, y, size, color){
         this.ctx.fillStyle = color;
-        this.ctx.fillRect(x,y,size,size);
+        this.ctx.fillRect(x, y, size, size);
     }
 
-    drawTriangle(x1,y1,x2,y2,x3,y3){
+    drawTriangle(x1, y1, x2, y2, x3, y3, color){
         this.ctx.beginPath();
-        this.ctx.moveTo(x1,y1);
-        this.ctx.lineTo(x2,y2);
-        this.ctx.lineTo(x3,y3);
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
+        this.ctx.lineTo(x3, y3);
         this.ctx.closePath();
-        //Provisonial
         this.ctx.fillStyle = color;
-    
         this.ctx.fill();
     }
 
     getColorPalette(id){
         const palette = {
             1: {
-                rightTriangle : "#B5193B",
+                rightTriangle : "#FE8601",
                 leftTriangle : "#FFFFFF",
-                square : "#EE1B2E"
+                square : " #FFDB01"
             },
             2: {
                 rightTriangle: "#FE5E02",
@@ -48,9 +45,9 @@ class Tetromino{
                 square: "#FE8602"
             },
             3:{
-                rightTriangle: "#FE8601",
+                rightTriangle: "#B5193B",
                 leftTriangle: "#FFFFFF",
-                square: "#FFDB01"
+                square: "#EE1B2E"
             },
             4:{
                 rightTriangle: "#22974C",
@@ -188,5 +185,27 @@ const TetrominoType = {
             [new Position(0, 1), new Position(1, 0), new Position(1, 1), new Position(2, 0)],
         ]
     },
+    J:{
+        id: 6,
+        initPosition: new Position(0, 3),
+        shapes: [
+            [new Position(0, 0), new Position(1, 0), new Position(1, 1), new Position(1, 2)],
+            [new Position(0, 1), new Position(0, 2), new Position(1, 1), new Position(2, 1)],
+            [new Position(1, 0), new Position(1, 1), new Position(1, 2), new Position(2, 2)],
+            [new Position(0, 1), new Position(1, 1), new Position(2, 0), new Position(2, 1)],
+        ]
+    },
+    L:{
+        id: 7,
+        initPosition: new Position(0, 3),
+        shapes: [
+            [new Position(0, 2), new Position(1, 0), new Position(1, 1), new Position(1, 2)],
+            [new Position(0, 1), new Position(1, 1), new Position(2, 1), new Position(2, 2)],
+            [new Position(1, 0), new Position(1, 1), new Position(1, 2), new Position(2, 0)],
+            [new Position(0, 0), new Position(0, 1), new Position(1, 1), new Position(2, 1)],
+        ]
+    },
 
 }
+
+export {Position, Tetromino, TetrominoType}
