@@ -6,7 +6,7 @@ class Position{
 }
 
 class Tetromino{
-    constructor(canvas, cellSize, shapes, initPosition, id){
+    constructor(canvas, cellSize, shapes = [], initPosition = new Position(), id=1){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
         this.cellSize = cellSize;
@@ -206,6 +206,42 @@ const TetrominoType = {
         ]
     },
 
+};
+
+class TetrominosBag{
+    constructor(canvas, cellSize){
+        this.canvas = canvas;
+        this.cellSize = cellSize;
+        this.bag = [];
+    }
+    fillBag(){
+        const tetrominosTypes = [
+            TetrominoType.T,
+            TetrominoType.O,
+            TetrominoType.I,
+            TetrominoType.S,
+            TetrominoType.Z,
+            TetrominoType.J,
+            TetrominoType.L,
+        ]
+        this.bag.length = 0;
+        tetrominosTypes.array.forEach((type) => {
+            this.bag.push(new Tetromino( //Esto esta en revisión
+                this.canvas, this.cellSize, type.shapes, type.initPosition, type.id
+            ));
+        });
+
+        for (let i = this.bag.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i+1));
+            [this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]]
+        }
+    }
+    nextTetromino(){
+        if (this.bag.length === 0) {
+            this.fillBag();
+        }
+        return this.bag.pop();
+    }
 }
 
-export {Position, Tetromino, TetrominoType}
+export {Position, Tetromino, TetrominoType, TetrominosBag}
